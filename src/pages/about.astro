@@ -23,8 +23,11 @@ import pinky from '../assets/albums/Pinky.jpeg?url';
 <p class="text-2xl text-left mx-20">If you want to find out more about what I like scroll down to find out my favorite music, games, etc. For projects go to my <a href="/projects" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">projects page</a>.</p>
 </div>
 <div>
-    <h2 class="text-3xl font-bold text-center">My favorites</h2>
-
+    <div class="title-wrapper">
+        <div class="side-line"></div>
+        <h2>My favorites</h2>
+        <div class="side-line"></div>
+    </div>
     <div class="grid grid-cols-2 gap-4 m-10">
         <div class="col-span-2 border-accent">
             <h3 class="text-2xl font-bold text-center m-4">My favorite albums</h3>
@@ -59,3 +62,19 @@ import pinky from '../assets/albums/Pinky.jpeg?url';
 
 </div>
 </Layout>
+
+<style>
+    .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.side-line {
+  flex: 1;
+  height: 4px;
+  background: #ff3355;
+  border-radius: 999px;
+}
+
+</style>

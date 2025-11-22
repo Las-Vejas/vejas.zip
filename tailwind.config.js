@@ -1,5 +1,11 @@
 module.exports = {
   theme: {
+    screens: {
+      sm: '640px',
+      md: '800px',
+      lg: '1140px',
+      'max-lg': {'max': '1140px'},
+    },
     colors: {
     'text': 'var(--text)',
     'background': 'var(--background)',
