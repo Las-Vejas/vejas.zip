@@ -6,9 +6,18 @@ import logo from '../assets/logo.svg?url';
         <a href="/"><img src={logo} class="h-10 w-auto" alt="lasvejas text as a logo"></a>
     </div>
     <div class="space-x-4 p-10">
-    <a href="/about"><button class="align-middle hover:underline decoration-wavy bg-gray-300/25 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">About</p></button></a>
-    <a href="/contact"><button class="align-middle hover:underline decoration-wavy bg-gray-300/25 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">Contact</p></button></a>
-    <a href="/projects"><button class="align-middle hover:underline decoration-wavy bg-gray-300/25 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">Projects</p></button></a>
-    <a href="/setup"><button class="align-middle hover:underline decoration-wavy bg-gray-300/25 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">My Setup</p></button></a>
+    <a href="/about"><button class="button align-middle hover:underline decoration-wavy bg-gray-300/50 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">About</p></button></a>
+    <a href="/contact"><button class="button align-middle hover:underline decoration-wavy bg-gray-300/50 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">Contact</p></button></a>
+    <a href="/projects"><button class="button align-middle hover:underline decoration-wavy bg-gray-300/50 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">Projects</p></button></a>
+    <a href="/setup"><button class="button align-middle hover:underline decoration-wavy bg-gray-300/50 border rounded-lg border-gray-300 border-radius-2 shadow-sm"><p class="m-1 mx-2">My Setup</p></button></a>
 </div>
 </div>
+
+<style>
+    .button:hover {
+        background-color: var(--primary);
+        color: white;
+        border: 2px solid var(--accent);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>

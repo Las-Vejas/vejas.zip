@@ -15,5 +15,8 @@
     "@vercel/speed-insights": "^1.2.0",
     "astro": "^5.15.1",
     "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "astor": "^0.1.5"
   }
 }
