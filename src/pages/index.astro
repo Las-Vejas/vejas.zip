@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/navmain.astro';
 import '../styles/global.css';
-import Vector from '../assets/Vecta1.svg?url';
+import Vector from '../assets/vecta1.svg?url';
 import ClipArrow from '../assets/clipita.svg?url';
 import GithubArrow from '../assets/githubita.svg?url';
 import InfoArrow from '../assets/infoita.svg?url';
@@ -69,8 +69,16 @@ html, body {
     pointer-events: auto;
 }
 .clip:hover {
-    color: #004d79;
-    border: 2px solid #95ec00;
+    color: #00629a;
+}
+.clip svg .path {
+    transition: stroke .2s ease, fill .2s ease, color .2s ease;
+    stroke: transparent;
+}
+.clip:hover svg .path {
+    stroke: #95ec00;
+    stroke-width: 1.2px;
+    vector-effect: non-scaling-stroke;
 }
 .path {
     fill: currentColor;

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vejas Guestbook</title>
+    <!-- Tailwind CSS for styling -->
+    
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen p-4">
+
+    <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-10">
+        <!-- Header -->
+        <div class="bg-brand p-6 text-center">
+            <h1 class="text-2xl font-bold text-white">📖 Vejas.site Guestbook</h1>
+            <p class="text-blue-100 text-sm mt-1">Powered by Firebase (No PHP needed!)</p>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+            
+            <!-- Input Form -->
+            <div class="mb-8 bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4 text-slate-700">Sign the Guestbook</h2>
+                <form id="guestbookForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Your Name</label>
+                        <input type="text" id="nameInput" required maxlength="30"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-brand focus:border-brand outline-none transition"
+                            placeholder="Enter your name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Message</label>
+                        <textarea id="messageInput" required rows="3" maxlength="200"
+                            class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-brand focus:border-brand outline-none transition"
+                            placeholder="Write a nice message..."></textarea>
+                    </div>
+                    <button type="submit" 
+                        class="w-full bg-brand hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-200 ease-in-out transform active:scale-95">
+                        Post Message
+                    </button>
+                </form>
+            </div>
+
+            <hr class="border-slate-200 my-6">
+
+            <!-- Message List -->
+            <h2 class="text-xl font-bold mb-4 text-slate-800">Recent Messages</h2>
+            <div id="loading" class="text-center text-slate-500 py-4">Loading messages...</div>
+            <div id="messagesList" class="space-y-4">
+                <!-- Messages will appear here -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // --- CONFIGURATION ---
+        // 1. Go to https://console.firebase.google.com/
+        // 2. Create a project (e.g., "vejas-guestbook")
+        // 3. Add a Web App to get your config
+        // 4. Enable "Firestore Database" in Test Mode
+        // 5. Enable "Authentication" -> "Anonymous" provider
+        
+        // REPLACE THIS OBJECT WITH YOUR OWN FIREBASE CONFIG
+        const firebaseConfig = JSON.parse(__firebase_config); // Using environment variable for demo, replace with yours!
+        
+        // Initialize
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'vejas-app';
+
+        // DOM Elements
+        const form = document.getElementById('guestbookForm');
+        const messagesList = document.getElementById('messagesList');
+        const loading = document.getElementById('loading');
+
+        // Auth & Listeners
+        async function init() {
+            try {
+                // Check for custom token or sign in anonymously
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        console.log("User logged in:", user.uid);
+                        setupRealtimeListener();
+                    }
+                });
+            } catch (error) {
+                console.error("Auth error:", error);
+                loading.textContent = "Error connecting to database.";
+            }
+        }
+
+        function setupRealtimeListener() {
+            // Query public messages
+            const q = query(
+                collection(db, 'artifacts', appId, 'public', 'data', 'guestbook_messages'),
+                limit(20)
+            );
+
+            // Listen for changes
+            onSnapshot(q, (snapshot) => {
+                loading.style.display = 'none';
+                messagesList.innerHTML = ''; // Clear list
+
+                // Convert to array and sort manually (safer than composite indexes)
+                let messages = [];
+                snapshot.forEach(doc => {
+                    messages.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Sort locally by timestamp (Newest first)
+                messages.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                if (messages.length === 0) {
+                    messagesList.innerHTML = '<p class="text-center text-slate-400 italic">No messages yet. Be the first!</p>';
+                    return;
+                }
+
+                messages.forEach(msg => {
+                    const date = msg.timestamp ? new Date(msg.timestamp.seconds * 1000).toLocaleDateString() : 'Just now';
+                    
+                    const el = document.createElement('div');
+                    el.className = "bg-white border border-slate-100 p-4 rounded-lg shadow-sm hover:shadow-md transition";
+                    el.innerHTML = `
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-bold text-brand">${escapeHtml(msg.name)}</h3>
+                            <span class="text-xs text-slate-400">${date}</span>
+                        </div>
+                        <p class="text-slate-700 text-sm leading-relaxed">${escapeHtml(msg.message)}</p>
+                    `;
+                    messagesList.appendChild(el);
+                });
+            }, (error) => {
+                console.error("Data fetch error:", error);
+                loading.textContent = "Error loading messages.";
+            });
+        }
+
+        // Handle Form Submit
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('nameInput').value.trim();
+            const message = document.getElementById('messageInput').value.trim();
+
+            if (!name || !message) return;
+
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            btn.disabled = true;
+            btn.innerText = "Sending...";
+
+            try {
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'guestbook_messages'), {
+                    name: name,
+                    message: message,
+                    timestamp: serverTimestamp()
+                });
+                form.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Error sending message. Check console.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = originalText;
+            }
+        });
+
+        // Utility to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
