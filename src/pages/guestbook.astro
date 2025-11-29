@@ -1,4 +1,8 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+import Navbar from '../components/navbar.astro';
+import MessageForm from '../components/MessageForm.astro';
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   import.meta.env.PRIVATE_SUPABASE_URL,
@@ -11,20 +15,24 @@ const { data: messages, error } = await supabase
   .order('created_at', { ascending: false });
 ---
 
-<h1>Messages</h1>
+<Layout>
+<Navbar />
+<h1 class="text-center text-3xl">Guestbook</h1>
+<MessageForm />
 {error ? (
   <p style="color:red">Failed to load messages.</p>
 ) : null}
-<ul class="w-full flex flex-col gap-4 px-4">
-    {messages && messages.length > 0 ? (
-        messages.map(msg => (
-            <li class="w-full rounded-lg p-4 bg-[rgba(255,255,255,0.02)]" style="margin-bottom:0;">
-                <div class="text-lg font-semibold">{msg.name}</div>
-                <div class="mt-1 text-base">{msg.message}</div>
-                <small class="text-sm text-gray-400 mt-2 block">{new Date(msg.created_at).toLocaleString()}</small>
-            </li>
-        ))
-    ) : (
-        <li class="w-full p-4 text-center text-gray-400">No messages yet, why not write one?</li>
-    )}
+<ul class="pt-10 flex flex-row flex-wrap justify-center items-start gap-4 px-4 w-full">
+  {messages && messages.length > 0 ? (
+    messages.map(msg => (
+      <li class="min-w-[220px] max-w-[320px] rounded-lg p-4 bg-[rgba(255,255,255,0.02)] flex-shrink-0" style="margin-bottom:0;">
+        <div class="text-lg font-semibold">{msg.name}</div>
+        <div class="mt-1 text-base">{msg.message}</div>
+        <small class="text-sm text-gray-400 mt-2 block">{new Date(msg.created_at).toLocaleString()}</small>
+      </li>
+    ))
+  ) : (
+    <li class="w-full p-4 text-center text-gray-400">No messages yet, why not write one?</li>
+  )}
 </ul>
+</Layout>

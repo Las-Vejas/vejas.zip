@@ -15,51 +15,41 @@ import pinky from '../assets/albums/Pinky.jpeg?url';
 
 <Layout>
 <Nav />
-<div class="m-5 space-x-2 space-y-5">
-<h1 class="text-text text-4xl font-bold text-center mt-10 mb-3">About Me</h1>
+<div class=" px-80 space-x-2 space-y-10">
+<h1 class="text-text text-4xl font-bold text-center mt-10 mb-5">About Me</h1>
 <div class="space-y-2 align-center">
-<p class="text-2xl text-left mx-20">My name is Vejas, I am 15 years old and I like to make electronics and music.</p>
-<p class="text-2xl text-left mx-20">I joined <a href="https://hackclub.com" target="_blank" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">Hack Club</a> to learn more about electronics and programming. From joining, I have created several electronics projects and this website is (currently) my biggest software one.</p>
-<p class="text-2xl text-left mx-20">If you want to find out more about what I like scroll down to find out my favorite music, games, etc. For projects go to my <a href="/projects" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">projects page</a>.</p>
+<p class="text-2xl text-left mx-20">My name is Vejas, I am 15 years old and I like everything related to electronics and music.</p>
+<p class="text-2xl text-left mx-20">I joined <a href="https://hackclub.com" target="_blank" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">Hack Club</a> to learn more about electronics and programming. Since joining, I have created several electronics projects and this website is (currently) my biggest software adventure yet.</p>
+<p class="text-2xl text-left mx-20">If you want to find out more about what I like scroll down to find out my favorite music, games, etc. For projects I have made go to my <a href="/projects" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">projects page</a>.</p>
 </div>
-<div>
+<div space-y-5>
     <div class="title-wrapper">
         <div class="side-line"></div>
-        <h2>My favorites</h2>
+        <h2 class="text-2xl">My favorites</h2>
         <div class="side-line"></div>
     </div>
-    <div class="grid grid-cols-2 gap-4 m-10">
-        <div class="col-span-2 border-accent">
-            <h3 class="text-2xl font-bold text-center m-4">My favorite albums</h3>
-            <div class="grid gap-4 grid-cols-3">
-                <div class="mx-5 space-y-2 mb-2">
-                    <img src={sabrina} alt="Image of Sabrina Carpenter" class="w-{640px}">
-                    <p class="text-center text-lg font-bold">Sabrina Carpenter</p>
-                </div>
-                <div class="mx-5 space-y-2 mb-2">
-                    <img src={impala} alt="Image of Tame Impala" class="w-{640px}">
-                    <p class="text-center text-lg font-bold">Tame Impala</p>
-                </div>
-                <div class="mx-5 space-y-2 mb-2">
-                    <img src={pinky} alt="Image of PinkPantheress" class="w-{640px}">
-                    <p class="text-center text-lg font-bold">PinkPantheress</p>
-                </div>
-            </div>
-        </div>
+    <div>
         <div class="border border-accent">
-            <h3>Games</h3>
+            <h3>Fave Games</h3>
         </div>
         <div>
-            <h3>Classical pieces I have played on the piano</h3>
+            <h3>Fave artists</h3>
         </div>
     </div>
+<div class="space-y-2">
+    <p>My internet friends (or just cool people)</p>
 <div class="flex columns-5 space-x-2">
-    <img src={htmlgif} class="w-(81px) h-(31px) shadow-2xs" alt="">
-    <img src={viewcomputer} class="w-(81px) h-(31px) shadow-2md" alt="">
-    <img src={applegif} class="w-(81px) h-(31px) shadow-2xl" alt="">
+    <a href="https://gideon.sh" target="_blank"><img src="https://gideon.sh/88x31.gif" alt="hey gideon!"></a>
+</div>
+    <div>
+        <p>random buttons</p>
+            <div class="flex columns-5 space-x-2">
+            <img src={htmlgif} class="w-(81px) h-(31px) shadow-2xs" alt="">
+            <img src={viewcomputer} class="w-(81px) h-(31px) shadow-2md" alt="">
+            <img src={applegif} class="w-(81px) h-(31px) shadow-2xl" alt="">
+        </div>
 </div>
 </div>
-
 </div>
 </Layout>
 
@@ -67,13 +57,14 @@ import pinky from '../assets/albums/Pinky.jpeg?url';
     .title-wrapper {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 5rem;
+  padding-inline: 2rem;
 }
 
 .side-line {
   flex: 1;
-  height: 4px;
-  background: #ff3355;
+  height: 2px;
+  background: #292929;
   border-radius: 999px;
 }
 

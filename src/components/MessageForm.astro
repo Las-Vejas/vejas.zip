@@ -8,7 +8,7 @@
   <textarea name="message" placeholder="Your deep thoughts" required style="display:block;margin-bottom:0.5em;"></textarea>
   <button type="submit">Send this sh*t</button>
 </form>
-<div id="formResponse" class="mt-2"></div>
+<div id="formResponse" class="text-center text-2xl text-lime-700 font-bold mt-2"></div>
 
 <script is:inline>
   const form = document.getElementById('messageForm');
@@ -35,20 +35,30 @@
 
 <style>
   #messageForm {
-    max-width: 400px;
+    max-width: max;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
   #messageForm input,
   #messageForm textarea {
-    padding: 0.5em;
+    padding: 1em;
     margin-bottom: 0.5em;
     border: 1px solid #000000;
     border-radius: 4px;
     font-size: 1em;
+
+    width: 100%;
+    max-width: 300px;
   }
   #messageForm button {
-    padding: 0.5em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    height: 2.5em;
     background-color: rgb(45, 45, 45);
     color: white;
     border: none;
