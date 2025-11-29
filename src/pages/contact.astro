@@ -8,14 +8,12 @@ import ContactForm from '../components/ContactForm.astro';
     <title>vejas.zip - contact</title>
 <Layout>
   <Nav />
-  <div class="p-3 space-y-3 text-center">
-    <div class="font-bold text-3xl">Contact me if you dare</div>
-    <p class="text-lg">I'm always open to discussing new projects and ideas, or if you just want to chat!</p>
+  <div class="p-2 space-y-10 text-center">
+    <h1 class="text-text font-bold text-4xl mt-10 mb-5">Contact me if you dare</h1>
+    <p class="text-xl">I'm always open to discussing new projects and ideas, or if you just want to chat!</p>
   </div>
-  <!-- split screen: form on the left, links on the right (stacks on small screens) -->
-  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[60vh] items-start px-4 max-w-6xl mx-auto">
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[60vh] items-start px-4 max-w-6xl mx-50">
     <div class="w-full">
-      <!-- client:load ensures the form JS runs only in browser -->
       <ContactForm client:load />
     </div>
     <div class="flex flex-col space-y-6">

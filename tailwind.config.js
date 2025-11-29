@@ -16,6 +16,7 @@ module.exports = {
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
+      mono: ['Martian Mono', 'monospace'],
     },
     extend: {
       borderRadius: {

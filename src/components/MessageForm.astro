@@ -3,12 +3,14 @@
 
 
 <form id="messageForm">
-  <input name="name" placeholder="Your name" required style="display:block;margin-bottom:0.5em;" />
-  <input name="email" type="email" placeholder="Your email (doesnt show up)" style="display:block;margin-bottom:0.5em;" />
-  <textarea name="message" placeholder="Your deep thoughts" required style="display:block;margin-bottom:0.5em;"></textarea>
-  <button type="submit">Send this sh*t</button>
+  <div class="form-inner">
+    <input name="name" placeholder="Your name" required />
+    <input name="email" type="email" placeholder="Your email (doesnt show up)" />
+    <textarea name="message" placeholder="Your deep thoughts" required></textarea>
+    <button type="submit">Send!</button>
+  </div>
 </form>
-<div id="formResponse" class="text-center text-2xl text-lime-700 font-bold mt-2"></div>
+<div id="formResponse" class="text-center text-2xl text-lime-500 font-bold mt-2"></div>
 
 <script is:inline>
   const form = document.getElementById('messageForm');
@@ -27,6 +29,9 @@
     if (res.ok) {
       responseDiv.textContent = 'Message sent!';
       form.reset();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } else {
       responseDiv.textContent = 'Something went wrong. Try again!';
     }
@@ -35,25 +40,40 @@
 
 <style>
   #messageForm {
-    max-width: max;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
+  }
+  @media (min-width: 400px) {
+    .form-inner {
+      max-width: 500px;
+      margin: 0 auto;
+    }
   }
   #messageForm input,
   #messageForm textarea {
-    padding: 1em;
+    padding: 0.25em 0.7em;
     margin-bottom: 0.5em;
     border: 1px solid #000000;
     border-radius: 4px;
     font-size: 1em;
-
+    line-height: 1.2;
+    height: 2.5em;
     width: 100%;
-    max-width: 300px;
+    box-sizing: border-box;
+  }
+  #messageForm textarea {
+    min-height: 5em;
+    resize: vertical;
+    text-align: start;
+    
   }
   #messageForm button {
     padding-left: 0.8em;
@@ -65,8 +85,10 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.175s cubic-bezier(0.4,0,0.2,1), color 0.1s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
   }
   #messageForm button:hover {
     background-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,0,0,0.12);
   }
 </style>

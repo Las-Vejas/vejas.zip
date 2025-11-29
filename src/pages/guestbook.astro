@@ -14,18 +14,28 @@ const { data: messages, error } = await supabase
   .select('*')
   .order('created_at', { ascending: false });
 ---
-
+<head>
+    <title>vejas.zip - guestbook</title>
+</head>
 <Layout>
 <Navbar />
-<h1 class="text-center text-3xl">Guestbook</h1>
-<MessageForm />
+<div class="text-center space-y-10 mt-10">
+<h1 class="text-text text-4xl font-bold text-center mt-10 mb-5">Guestbook</h1>
+</div>
+
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[60vh] items-start px-4 max-w-6xl mx-auto">
+    <div class="w-full">
+    <MessageForm />
+    </div>
+    <div class="flex flex-col space-y-6">
+      <div class=" p-4 rounded shadow">
 {error ? (
   <p style="color:red">Failed to load messages.</p>
 ) : null}
-<ul class="pt-10 flex flex-row flex-wrap justify-center items-start gap-4 px-4 w-full">
+<ul class="pt-8 flex flex-row flex-wrap justify-center items-start gap-4 px-4 w-full">
   {messages && messages.length > 0 ? (
     messages.map(msg => (
-      <li class="min-w-[220px] max-w-[320px] rounded-lg p-4 bg-[rgba(255,255,255,0.02)] flex-shrink-0" style="margin-bottom:0;">
+      <li class="min-w-[220px] max-w-[320px] rounded-lg p-4 bg-[rgba(255,255,255,0.02)] shrink-0 border border-black/20 shadow" style="margin-bottom:0;">
         <div class="text-lg font-semibold">{msg.name}</div>
         <div class="mt-1 text-base">{msg.message}</div>
         <small class="text-sm text-gray-400 mt-2 block">{new Date(msg.created_at).toLocaleString()}</small>
@@ -35,4 +45,5 @@ const { data: messages, error } = await supabase
     <li class="w-full p-4 text-center text-gray-400">No messages yet, why not write one?</li>
   )}
 </ul>
+      </div>
 </Layout>
