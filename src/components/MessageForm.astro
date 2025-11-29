@@ -1,0 +1,58 @@
+---
+---
+
+
+<form id="messageForm">
+  <input name="name" placeholder="Your name" required style="display:block;margin-bottom:0.5em;" />
+  <input name="email" type="email" placeholder="Your email (doesnt show up)" style="display:block;margin-bottom:0.5em;" />
+  <textarea name="message" placeholder="Your deep thoughts" required style="display:block;margin-bottom:0.5em;"></textarea>
+  <button type="submit">Send this sh*t</button>
+</form>
+<div id="formResponse" class="mt-2"></div>
+
+<script is:inline>
+  const form = document.getElementById('messageForm');
+  const responseDiv = document.getElementById('formResponse');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    responseDiv.textContent = '';
+    const formData = new FormData(form);
+    const res = await fetch('/api/submit', {
+      method: 'POST',
+      body: formData
+    });
+    if (res.ok) {
+      responseDiv.textContent = 'Message sent!';
+      form.reset();
+    } else {
+      responseDiv.textContent = 'Something went wrong. Try again!';
+    }
+  });
+</script>
+
+<style>
+  #messageForm {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  #messageForm input,
+  #messageForm textarea {
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  #messageForm button {
+    padding: 0.5em;
+    background-color: rgb(45, 45, 45);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  #messageForm button:hover {
+    background-color: var(--accent);
+  }
