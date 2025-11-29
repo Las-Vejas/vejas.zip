@@ -9,12 +9,14 @@ const supabase = createClient(
 export async function POST({ request }: APIContext) {
   const formData = await request.formData();
 
+
   const name = formData.get("name");
+  const email = formData.get("email");
   const message = formData.get("message");
 
   const { error } = await supabase
     .from("messages")
-    .insert([{ name, message }]);
+    .insert([{ name, email, message }]);
 
   if (error) {
     console.log("bro supabase is having a meltdown:", error);

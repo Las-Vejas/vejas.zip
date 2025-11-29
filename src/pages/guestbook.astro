@@ -1,0 +1,30 @@
+---
+import { createClient } from "@supabase/supabase-js";
+const supabase = createClient(
+  import.meta.env.PRIVATE_SUPABASE_URL,
+  import.meta.env.PRIVATE_SUPABASE_ANON_KEY
+);
+
+const { data: messages, error } = await supabase
+  .from('messages')
+  .select('*')
+  .order('created_at', { ascending: false });
+---
+
+<h1>Messages</h1>
+{error ? (
+  <p style="color:red">Failed to load messages.</p>
+) : null}
+<ul class="w-full flex flex-col gap-4 px-4">
+    {messages && messages.length > 0 ? (
+        messages.map(msg => (
+            <li class="w-full rounded-lg p-4 bg-[rgba(255,255,255,0.02)]" style="margin-bottom:0;">
+                <div class="text-lg font-semibold">{msg.name}</div>
+                <div class="mt-1 text-base">{msg.message}</div>
+                <small class="text-sm text-gray-400 mt-2 block">{new Date(msg.created_at).toLocaleString()}</small>
+            </li>
+        ))
+    ) : (
+        <li class="w-full p-4 text-center text-gray-400">No messages yet, why not write one?</li>
+    )}
+</ul>
