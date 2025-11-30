@@ -2,9 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/navbar.astro';
 import '../styles/global.css';
-import htmlgif from '../assets/88x31/html.gif?url';
-import viewcomputer from '../assets/88x31/IMG_0036.gif?url';
-import applegif from '../assets/88x31/apple.gif?url';
 ---
 <head>
     <title>vejas.zip - about</title>
@@ -12,41 +9,28 @@ import applegif from '../assets/88x31/apple.gif?url';
 
 <Layout>
 <Nav />
-<div class="px-auto space-x-2 space-y-10 text-center mt-10 mb-10">
-<h1 class="text-text text-4xl font-bold text-center mt-10 mb-5">About Me</h1>
-<div class="space-y-2 align-center">
-<p class="text-2xl text-left mx-20">My name is Vejas, I am 15 years old and I like everything related to electronics and music.</p>
-<p class="text-2xl text-left mx-20">I joined <a href="https://hackclub.com" target="_blank" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">Hack Club</a> to learn more about electronics and programming. Since joining, I have created several electronics projects and this website is (currently) my biggest software adventure yet.</p>
-<p class="text-2xl text-left mx-20">If you want to find out more about what I like scroll down to find out my favorite music, games, etc. For projects I have made go to my <a href="/projects" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">projects page</a>.</p>
-</div>
-<div space-y-5>
-    <div class="title-wrapper">
-        <div class="side-line"></div>
-        <h2 class="text-2xl">My favorites</h2>
-        <div class="side-line"></div>
+
+<div class="px-auto space-x-2 space-y-10 text-left mt-10 mb-10 mx-auto">
+    <h1 class="text-text text-4xl font-bold text-center mt-10 mb-15">About Me</h1>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="flex flex-col mx-auto w-full max-w-2xl gap-4 bg-white p-5 rounded-xl mb-10 border border-gray-400/50">
+            <p class="text-2xl mx-10">Hey! I'm Vejas, a 15 years old high school student in Luxembourg &#x1f1f1;&#x1f1fa;.</p>
+            <p class="text-2xl mx-10">I joined <a href="https://hackclub.com" target="_blank" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">Hack Club</a> this year to learn more about electronics and programming. Since joining, I have created several harware projects like A Raspberry Pi Pico clone and a macropad, and this website is (currently) my biggest software adventure yet.</p>
+            <p class="text-2xl mx-10">If you want to find out more about what I like scroll down to find out my favorite music, games, etc. For projects I have made go to my <a href="/projects" class="text-blue-600 hover:text-2xl hover:text-underline hover:decoration-wavy hover:text-blue-500">projects page</a>.</p>
+        </div>
+            <div class="flex flex-col mx-auto w-full max-w-2xl gap-4 bg-white p-5 rounded-xl border mb-10 border-gray-400/50">
+                <h3 class="text-2xl font-semibold">My hobbies</h3>
+                <ul class="list-disc space-y-4 list-inside text-2xl mx-auto">
+                    <li>Coding (obviously)</li>
+                    <li>Building keyboards and other electronics</li>
+                    <li>Listening to music (white girl, pop and classical)</li>
+                    <li>Swimming &#x1f3ca;</li>
+                    <li>Playing piano &#127929;</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div>
-        <div class="border border-accent">
-            <h3>Fave Games</h3>
-        </div>
-        <div>
-            <h3>Fave artists</h3>
-        </div>
-    </div>
-<div class="space-y-2">
-    <p>My internet friends (or just cool people)</p>
-<div class="flex columns-5 space-x-2">
-    <a href="https://gideon.sh" target="_blank"><img src="https://gideon.sh/88x31.gif" alt="hey gideon!"></a>
-</div>
-    <div>
-        <p>random buttons</p>
-            <div class="flex columns-5 space-x-2">
-            <img src={htmlgif} class="w-(81px) h-(31px) shadow-2xs" alt="">
-            <img src={viewcomputer} class="w-(81px) h-(31px) shadow-2md" alt="">
-            <img src={applegif} class="w-(81px) h-(31px) shadow-2xl" alt="">
-        </div>
-</div>
-</div>
+
 </div>
 </Layout>
 
@@ -60,8 +44,8 @@ import applegif from '../assets/88x31/apple.gif?url';
 
 .side-line {
   flex: 1;
-  height: 2px;
-  background: #292929;
+  height: 1.5px;
+  background: #696969;
   border-radius: 999px;
 }
 
