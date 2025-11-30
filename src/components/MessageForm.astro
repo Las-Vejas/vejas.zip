@@ -1,14 +1,29 @@
 ---
 ---
+<div class="flex justify-center items-end ">
+      <div class="flex flex-col w-full max-w-xl gap-4 bg-white p-5 rounded-xl border mb-10 border-gray-400/50">
+        <div class="font-bold font-martian text-2xl text-start">Find me on</div>
+    <form id="messageForm" class="space-y-3">
+      <label class="block">
+        <span class="block mb-1">Your name:</span>
+        <input type="text" name="name" placeholder="Enter your name" required
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-3 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+      </label>
 
-<form id="messageForm">
-  <div class="form-inner">
-    <input name="name" placeholder="Your name" required />
-    <input name="email" type="email" placeholder="Your email (doesnt show up)" />
-    <textarea name="message" placeholder="Your deep thoughts" required></textarea>
-    <button type="submit">Send!</button>
-  </div>
-</form>
+      <label class="block">
+        <span class="block mb-1">Email (not visible):</span>
+        <input type="email" name="email" placeholder="contact@vejas.zip" required
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-3 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+      </label>
+
+      <label class="block">
+        <span class="block mb-1">Message:</span>
+        <textarea name="message" placeholder="Your deep thoughts go here..." rows="6" required
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-3 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+      </label>
+
+      <button type="submit" class="w-full bg-blue-500 text-white rounded-md px-4 py-2.5 hover:bg-blue-600 hover:shadow-2xl">Send</button>
+    </form>
 <div id="formResponse" class="text-center text-2xl text-lime-500 font-bold mt-2"></div>
 
 <script is:inline>
@@ -38,12 +53,6 @@
 </script>
 
 <style>
-  #messageForm {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
   .form-inner {
     display: flex;
     flex-direction: column;
@@ -55,39 +64,5 @@
       max-width: 500px;
       margin: 0 auto;
     }
-  }
-  #messageForm input,
-  #messageForm textarea {
-    padding: 0.25em 0.7em;
-    margin-bottom: 0.5em;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    font-size: 1em;
-    line-height: 1.2;
-    height: 2.5em;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  #messageForm textarea {
-    min-height: 5em;
-    resize: vertical;
-    text-align: start;
-    
-  }
-  #messageForm button {
-    padding-left: 0.8em;
-    padding-right: 0.8em;
-    height: 2.5em;
-    background-color: rgb(45, 45, 45);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.175s cubic-bezier(0.4,0,0.2,1), color 0.1s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s cubic-bezier(0.4,0,0.2,1);
-  }
-  #messageForm button:hover {
-    background-color: var(--accent);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,0,0,0.12);
   }
 </style>
