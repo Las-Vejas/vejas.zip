@@ -12,7 +12,7 @@ import Vector from '../assets/Vector10.svg?url';
 <div class="flex flex-col items-center content-center space-between justify-center min-h-screen max-h-90vh">
         <div class="w-full flex justify-center mx-auto">
             <div class="relative inline-block w-full mx-auto max-w-3xl">
-                <img src={Vector} alt="lasvejas" class="block w-full h-auto mx-auto my-5 lg:p-0 sm:p-8 md:p-8" />
+                <img src={Vector} alt="lasvejas" class="p-4 w-auto h-auto mx-auto my-4 lg:p-0 sm:p-8 md:p-8" />
                 <div class="hidden md:block">
                 <!--<a href="/contact"><img src={ClipArrow} alt="clip" class="absolute hover:text-white" style="left:82.6%; top:16.5%; transform:translate(-50%,-50%); pointer-events:auto;" /></a> -->
                 <a href="/contact" class="clip" style="left:82.6%; top:16.5%; transform:translate(-50%,-50%); pointer-events:auto; hover:text-white;">
@@ -67,11 +67,12 @@ import Vector from '../assets/Vector10.svg?url';
                     </svg>
                 </a>
             </div>
-                <div class="space-x-6 text-center md:hidden mobile:flex mobile:justify-center mobile:space-x-6 mt-4">
-                    <a href="/about">About Me</a>
-                    <a href="/contact">Contact Me</a>
-                    <a href="/projects">Projects</a>
-                    <a href="/setup">My Setup</a>
+                <div class="mx-5 space-x-4 text-center md:hidden mobile:flex mobile:justify-center mobile:space-x-6 mt-4">
+                    <button><a href="/about">About Me</a></button>
+                    <button><a href="/contact">Contact Me</a></button>
+                    <button><a href="/projects">Projects</a></button>
+                    <button><a href="/setup">My Setup</a></button>
+                    <button><a href="/guestbook">Guestbook</a></button>
                 </div>
             </div>
         </div>
