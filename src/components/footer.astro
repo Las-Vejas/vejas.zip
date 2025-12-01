@@ -1,0 +1,39 @@
+---
+import '../layouts/Layout.astro';
+import '../styles/global.css';
+import logo from '../assets/logo.svg?url';
+const currentPath = Astro.url.pathname;
+const links = [
+    { href: '/about', label: 'About' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/guestbook', label: 'Guestbook' }
+];
+---
+<div class="bg-(--background) bottom-0 stick-bottom my-4 w-full h-auto flex items-end justify-between px-6 space-x-10 text-center">
+  <div>
+    <a href="/"><img src={logo} class="h-10 w-auto" alt="lasvejas text as a logo"></a>
+    <div class="mt-3 flex columns-1">
+      {links
+        .filter(link => link.href !== currentPath)
+        .map(link => (
+          <a href={link.href} class="link">{link.label}</a>
+        ))}
+    </div>
+  </div>
+<p class="text-gray-600">&copy; Vejas, {new Date().getFullYear()}. All rights reserved.</p>
+</div>
+
+<style>
+  .link {
+    margin-right: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-decoration-style: wavy;
+    color: var(--text-accent);
+  }

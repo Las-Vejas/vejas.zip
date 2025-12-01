@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/navbar.astro';
 import Layout from '../layouts/Layout.astro';
+import Footer from '../components/footer.astro';
 import '../styles/global.css';
 ---
 <head></head>
@@ -13,7 +14,7 @@ import '../styles/global.css';
 
 <p class="text-center text-xl mx-10 my-4">I really like working on hardware projects (even though im a beginner at electronics). My projects consist of some (wannabe)keyboards and other little things. </p>
 
-<div class="m-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="mb-10 m-5 grid grid-cols-1 md:grid-cols-3 gap-4">
 
     <div class="bg-primary/15 rounded border border-primary dark:border-primary-dark">
         <h2 class="text-2xl font-semibold text-center mt-3">Wind75</h2>
@@ -71,4 +72,5 @@ import '../styles/global.css';
 
 </div>
 </div>
+<Footer />
 </Layout>

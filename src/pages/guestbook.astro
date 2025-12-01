@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Navbar from '../components/navbar.astro';
 import MessageForm from '../components/MessageForm.astro';
+import Footer from '../components/footer.astro';
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   import.meta.env.PRIVATE_SUPABASE_URL,
@@ -49,4 +50,8 @@ const { data: messages, error } = await supabase
   )}
 </ul>
       </div>
+    </div>
+  </div>
+<Footer />
+
 </Layout>
