@@ -9,8 +9,33 @@ const links = [
     { href: '/contact', label: 'Contact' },
     { href: '/guestbook', label: 'Guestbook' }
 ];
+import { Octokit } from 'octokit';
+
+const octokit = new Octokit({
+  auth: import.meta.env.GITHUB_TOKEN
+});
+const owner = 'Las-Vejas';
+const repo = 'personalsiteysws';
+let latestCommit = null;
+try {
+  const { data: commits } = await octokit.request('GET /repos/{owner}/{repo}/commits', {
+    owner,
+    repo,
+    per_page: 1
+  });
+  if (commits && commits.length > 0) {
+    const authorDate = commits[0].commit.author?.date;
+    latestCommit = {
+      hash: commits[0].sha.substring(0, 7),
+      date: authorDate ? new Date(authorDate).toLocaleDateString() : new Date().toLocaleDateString(),
+      html_url: commits[0].html_url
+    };
+  }
+} catch (e) {
+  latestCommit = null;
+}
 ---
-<div class="bg-(--background) bottom-0 stick-bottom my-4 w-full h-auto flex items-end justify-between px-6 space-x-10 text-center">
+<footer class="bottom-3 w-full bg-background dark:bg-background-dark mt-auto flex items-end justify-between px-6 space-x-5 text-center py-4">
   <div>
     <a href="/"><img src={logo} class="h-10 w-auto" alt="lasvejas text as a logo"></a>
     <div class="mt-3 flex columns-1">
@@ -19,10 +44,16 @@ const links = [
         .map(link => (
           <a href={link.href} class="link">{link.label}</a>
         ))}
+        
     </div>
+    {latestCommit && (
+          <p>
+            Latest commit <a href={latestCommit.html_url} class="underline hover:decoration-wavy" target="_blank" rel="noopener noreferrer">{latestCommit.hash}</a> on {latestCommit.date}
+          </p>
+        )}
   </div>
 <p class="text-gray-600">&copy; Vejas, {new Date().getFullYear()}. All rights reserved.</p>
-</div>
+</footer>
 
 <style>
   .link {
