@@ -1,27 +1,17 @@
-module.exports = {
-  theme: {
-    screens: {
-      sm: '640px',
-      md: '800px',
-      lg: '1140px',
-      'max-lg': {'max': '1140px'},
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                text: 'var(--text)',
+                background: 'var(--background)',
+                primary: 'var(--primary)',
+                secondary: 'var(--secondary)',
+                accent: 'var(--accent)',
+            },
+        },
     },
-    colors: {
-    'text': 'var(--text)',
-    'background': 'var(--background)',
-    'primary': 'var(--primary)',
-    'secondary': 'var(--secondary)',
-     'accent': 'var(--accent)',
-    },
-    fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
-      serif: ['Merriweather', 'serif'],
-      mono: ['Martian Mono', 'monospace'],
-    },
-    extend: {
-      borderRadius: {
-        '4xl': '2rem',
-      }
-    }
-  }
+    plugins: [],
 }

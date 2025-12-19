@@ -1,11 +1,18 @@
 ---
 // src/components/ProjectCard.astro
-const { title, description, link } = Astro.props;
+const { title, description, link, secondLink, secondLinkText } = Astro.props;
 ---
-<div class="bg-primary/15 rounded border border-primary dark:border-primary-dark">
+<div class="bg-white/15 rounded border border-gray-400 dark:border-gray-800">
   <h2 class="text-2xl font-semibold mt-3 mx-3">{title}</h2>
   <p class="m-3">{description}</p>
-  <div class="flex justify-center mx-auto mb-3">
-    <a href={link} class="rounded-lg py-1 px-2 bg-blue-600 text-text-dark">See on GitHub</a>
+  <div class="mx-3 flex justify-start gap-2 mb-3">
+    {secondLink && (
+      <a href={secondLink} class="rounded-lg py-1 px-2 bg-green-600 text-white">
+        {secondLinkText || 'View More'}
+      </a>
+    )}
+    <div>    
+      <a href={link} class="rounded-lg py-1 px-2 bg-blue-800 text-white">GitHub Repo</a>
+    </div>
   </div>
 </div>
