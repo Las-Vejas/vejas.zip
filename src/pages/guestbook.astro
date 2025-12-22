@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Navbar from '../components/navbar.astro';
 import MessageForm from '../components/MessageForm.astro';
-import Footer from '../components/footer.astro';
 import { createClient } from "@supabase/supabase-js";
 const supabase = createClient(
   import.meta.env.PRIVATE_SUPABASE_URL,
@@ -38,13 +37,21 @@ const { data: messages, error } = await supabase
 ) : null}
 <ul class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-4 px-4 w-full">
   {messages && messages.length > 0 ? (
-    messages.map(msg => (
+    messages.map(msg => {
+      const website = msg.website && msg.website.trim() !== '' ? msg.website : null;
+      return (
       <li class="min-w-[220px] max-w-[320px] rounded-lg p-4 bg-[rgba(255,255,255,0.02)] shrink-0 border border-black/20 shadow" style="margin-bottom:0;">
-        <div class="text-lg font-semibold">{msg.name}</div>
+        <div class="text-lg font-semibold">
+          {website ? (
+            <a href={website} class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">{msg.name}</a>
+          ) : (
+            <span>{msg.name}</span>
+          )}
+        </div>
         <div class="mt-1 text-base">{msg.message}</div>
         <small class="text-sm text-gray-400 mt-2 block">{new Date(msg.created_at).toLocaleString()}</small>
       </li>
-    ))
+    )})
   ) : (
     <li class="w-full p-4 text-center text-gray-400">No messages yet, why not write one?</li>
   )}

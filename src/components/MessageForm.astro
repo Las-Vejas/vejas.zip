@@ -1,30 +1,37 @@
 ---
 ---
 <div class="flex justify-center items-end ">
-      <div class="flex flex-col w-full max-w-xl gap-4 bg-white p-5 rounded-xl border border-gray-400/50">
+      <div class="flex flex-col w-full max-w-xl bg-white p-5 rounded-xl border border-gray-400/50">
         <div class="font-bold font-martian text-2xl text-start">Leave a message!</div>
-    <form id="messageForm" class="space-y-3">
+    <form id="messageForm" class="space-y-3 mt-4">
       <label class="block">
         <span class="block mb-1">Your name:</span>
         <input type="text" name="name" placeholder="Enter your name" required
-          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-3 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
       </label>
 
       <label class="block">
         <span class="block mb-1">Email (not visible):</span>
         <input type="email" name="email" placeholder="contact@vejas.zip" required
-          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-3 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+      </label>
+
+      <label class="block">
+        <span class="block mb-1">Your own website (optional):</span>
+        <input type="url" name="website" placeholder="https://yourwebsite.com (don't forget https://)"
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
       </label>
 
       <label class="block">
         <span class="block mb-1">Message:</span>
         <textarea name="message" placeholder="Your deep thoughts go here..." rows="6" required
-          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-3 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
+          class="block w-full rounded-md border border-gray-500 bg-gray-300/25 px-2.5 py-2.5 text-base outline-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:outline-indigo-500 sm:text-sm"/>
       </label>
 
-      <button type="submit" class="w-full bg-blue-500 text-white rounded-md px-4 py-2.5 hover:bg-blue-600 hover:shadow-2xl">Send</button>
+      <button type="submit" class="w-full bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 hover:shadow-2xl">Send</button>
+      
     </form>
-<div id="formResponse" class="text-center text-2xl text-lime-500 font-bold mt-2"></div>
+    <div id="formResponse" class="text-center text-2xl text-lime-600 font-bold mt-2"></div>
 
 <script is:inline>
   const form = document.getElementById('messageForm');
@@ -36,6 +43,8 @@
     const name = formData.get("name");
     const email = formData.get("email");
     const message = formData.get("message");
+    const website = formData.get("website");
+    
     const res = await fetch('/api/submit', {
       method: 'POST',
       body: formData

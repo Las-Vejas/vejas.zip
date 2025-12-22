@@ -12,11 +12,12 @@ export async function POST({ request }: APIContext) {
 
   const name = formData.get("name");
   const email = formData.get("email");
+  const website = formData.get("website");
   const message = formData.get("message");
 
   const { error } = await supabase
     .from("messages")
-    .insert([{ name, email, message }]);
+    .insert([{ name, email, website, message }]);
 
   if (error) {
     console.log("bro supabase is having a meltdown:", error);
